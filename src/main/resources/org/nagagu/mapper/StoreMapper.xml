@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nagagu.mapper.StoreMapper">
+	<resultMap type="org.nagagu.domain.ProductVO" id="productMap">
+		<result property="bno" column="bno" />
+		<result property="writer" column="writer" />
+		<result property="writer_picture" column="writer_picture" />
+		<result property="workshopName" column="workshopName" />
+		<result property="writer_picture" column="writer_picture" />
+		<result property="title" column="title" />
+		<result property="category" column="category" />
+		<result property="regdate" column="regdate" />
+		<result property="updateDate" column="updateDate" />
+		<result property="updateDate" column="updatedate" />		
+		<result property="replyCnt" column="replyCnt" />		
+		<result property="liekCnt" column="liekCnt" />		
+		<result property="readCnt" column="readCnt" />		
+		<result property="price" column="price" />		
+		<result property="salesCnt" column="salesCnt" />		
+		<result property="color" column="color" />		
+		<result property="allsize" column="allsize" />		
+		<result property="content" column="content" />		
+		<result property="banner" column="banner" />		
+		<result property="mainImage" column="mainImage" />		
+		<result property="status" column="status" />		
+		<result property="stock" column="stock" />		
+		<result property="color" column="color" />		
+		<result property="shipPrice" column="shipPrice" />		
+		<result property="shipCompany" column="shipCompany" />		
+		<result property="shipReturnPrice" column="shipReturnPrice" />		
+		<result property="shipChangePrice" column="shipChangePrice" />		
+		<result property="shipReturnPlace" column="shipReturnPlace" />		
+		<result property="shipDays" column="shipDays" />		
+		<result property="shipInfo" column="shipInfo" />		
+	</resultMap>
+<select id="getList" resultMap="productMap">
+<![CDATA[
+select * from tbl_proBoard where bno > 0
+]]>
+</select>
+<sql id="criteria">
+	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'G'.toString()">
+						tags like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'T'.toString()">
+						title like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'C'.toString()">
+						content like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'W'.toString()">
+						writer like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+	
+	<!-- <if test="isReview != 0">  isReview=#{isReview} AND</if> -->
+	<if test="category != 'all'">  category=#{category} AND</if>
+</sql>
+<select id="getListWithPaging" resultMap="productMap">
+<![CDATA[
+select 
+bno,writer,writer_picture,workshopName,title,category,regdate,updatedate,replyCnt,likeCnt,readCnt,
+	price,salesCnt,color,allsize,content,banner,mainImage,status,stock,
+	shipPrice,shipCompany,shipReturnPrice,shipChangePrice,shipReturnPlace,shipDays,shipInfo
+from
+	(select 
+	/*+ index_desc(tbl_proBoard pk_proBoard) */
+	rownum rn, bno,writer,writer_picture,workshopName,title,category,regdate,updatedate,replyCnt,likeCnt,readCnt,
+	price,salesCnt,color,allsize,content,banner,mainImage,status,stock,
+	shipPrice,shipCompany,shipReturnPrice,shipChangePrice,shipReturnPlace,shipDays,shipInfo
+	from tbl_proBoard
+	where 
+]]>
+	<include refid="criteria"></include>
+<![CDATA[
+	rownum <= #{pageNum}*#{amount}
+]]>
+<if test="sort != null"> ORDER BY #{sort} DESC </if>
+<![CDATA[
+)
+where rn>(#{pageNum}-1) * #{amount}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+select count(*)	from tbl_proBoard where 
+<include refid="criteria"></include>
+bno >0
+</select>
+
+<select id="read" resultType="org.nagagu.domain.ProductVO">
+select * from tbl_proBoard where bno=#{bno}
+</select>
+<update id="updateCnt">
+	update tbl_proBoard 
+	set readCnt = readCnt + 1
+	where bno=#{bno}
+</update>
+
+<insert id="insert">
+	insert into tbl_proBoard
+	(bno,writer,writer_picture,workshopName,title,category,regdate,updatedate,replyCnt,likeCnt,readCnt,
+	price,salesCnt,color,allsize,content,banner,mainImage,status,stock,
+	shipPrice,shipCompany,shipReturnPrice,shipChangePrice,shipReturnPlace,shipDays,shipInfo)
+	values 
+	(seq_proBoard.nextval,#{writer},#{writer_picture},#{workshopName},#{title},#{category},sysdate,sysdate,#{replyCnt},#{likeCnt},#{readCnt},
+	#{price},#{salesCnt},#{color},#{allsize},#{content},#{banner},#{mainImage},#{status},#{stock},
+	#{shipPrice},#{shipCompany},#{shipReturnPrice},#{shipChangePrice},#{shipReturnPlace},#{shipDays},#{shipInfo})
+</insert>
+
+<insert id="insertSelectKey"> 
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		select seq_proBoard.nextval from dual
+	</selectKey>
+	insert into tbl_proBoard
+	(bno,writer,writer_picture,workshopName,title,category,regdate,updatedate,replyCnt,likeCnt,readCnt,
+	price,salesCnt,color,allsize,content,banner,mainImage,status,stock,
+	shipPrice,shipCompany,shipReturnPrice,shipChangePrice,shipReturnPlace,shipDays,shipInfo)
+	values 
+	(#{bno},#{writer},#{writer_picture},#{workshopName},#{title},#{category},sysdate,sysdate,#{replyCnt},#{likeCnt},#{readCnt},
+	#{price},#{salesCnt},#{color},#{allsize},#{content},#{banner},#{mainImage},#{status},#{stock},
+	#{shipPrice},#{shipCompany},#{shipReturnPrice},#{shipChangePrice},#{shipReturnPlace},#{shipDays},#{shipInfo})
+</insert>
+<delete id="delete">
+	delete from tbl_proBoard where bno=#{bno}
+</delete>
+<update id="update">
+	update tbl_proBoard
+	set 
+		writer=#{writer},
+		writer_picture=#{writer_picture},
+		workshopName=#{workshopName},
+		title=#{title},
+		category=#{category},
+		updatedate=sysdate,
+		price=#{price},
+		color=#{color},
+		allsize=#{allsize},
+		content=#{content},
+		banner=#{banner},
+		mainImage=#{mainImage},
+		status=#{status},
+		stock=#{stock},
+		shipPrice=#{shipPrice},
+		shipCompany=#{shipCompany},
+		shipReturnPrice=#{shipReturnPrice},
+		shipChangePrice=#{shipChangePrice},
+		shipReturnPlace=#{shipReturnPlace},
+		shipDays=#{shipDays},
+		shipInfo=#{shipInfo}
+	where bno=#{bno}
+</update>
+<update id="member_edit_update">
+	update tbl_proBoard
+	set 
+		writer_picture=#{member_picture}, 
+		workshopName=#{member_nick}
+	where writer=#{member_id}
+</update>
+
+<update id="updateReviewCnt">
+	update tbl_proBoard 
+	set replycnt = replycnt + #{amount}
+	where bno=#{bno}
+</update>
+
+</mapper>

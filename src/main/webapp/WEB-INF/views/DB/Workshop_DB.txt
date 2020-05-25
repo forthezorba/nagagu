@@ -1,0 +1,45 @@
+create sequence nagagu_workshop_member_seq
+    start with 1
+    increment by 1;
+    
+create table nagagu_workshop_member(
+    WORKSHOP_NUM number PRIMARY key,
+    WORKSHOP_EMAIL varchar2(30) UNIQUE,
+    WORKSHOP_PASS varchar2(30),
+    WORKSHOP_NAME varchar2(50) UNIQUE,
+    WORKSHOP_CEO_NAME varchar2(20),
+    WORKSHOP_PHONE varchar2(30),
+    WORKSHOP_DATE DATE,
+    WORKSHOP_LICENSE varchar2(100),
+    WORKSHOP_INTRO varchar2(2000),
+    WORKSHOP_STATUS number default 0,
+    WORKSHOP_ZIP number,
+    WORKSHOP_ADDRESS1 varchar2(50),
+    WORKSHOP_ADDRESS2 varchar2(50),
+    WORKSHOP_OWNER VARCHAR2(15),
+    WORKSHOP_BANK VARCHAR2(20),
+    WORKSHOP_ACNUM VARCHAR2(100) UNIQUE,
+    WORKSHOP_PICTURE VARCHAR2(1000)
+    );
+    
+    
+create table delete_workshop_member(
+    WORKSHOP_NUM number,
+    WORKSHOP_EMAIL varchar2(30) UNIQUE,
+    WORKSHOP_PASS varchar2(30),
+    WORKSHOP_NAME varchar2(50) UNIQUE,
+    WORKSHOP_CEO_NAME varchar2(20),
+    WORKSHOP_PHONE varchar2(30),
+    WORKSHOP_DATE DATE,
+    WORKSHOP_LICENSE varchar2(100),
+    WORKSHOP_INTRO varchar2(2000),
+    WORKSHOP_STATUS number default 0,
+    WORKSHOP_ZIP number,
+    WORKSHOP_ADDRESS1 varchar2(50),
+    WORKSHOP_ADDRESS2 varchar2(50),
+    WORKSHOP_OWNER VARCHAR2(15),
+    WORKSHOP_BANK VARCHAR2(20),
+    WORKSHOP_ACNUM VARCHAR2(100) UNIQUE,
+    WORKSHOP_PICTURE VARCHAR2(1000),
+    DELETE_SYSDATE DATE
+    );

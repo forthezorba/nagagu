@@ -1,0 +1,355 @@
+    @media (min-width: 768px) {
+        html,
+        body {
+            font-size: 15px;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .cbody {
+            margin-right: auto;
+            margin-left: auto;
+            box-sizing: border-box;
+            width: calc(100% - 80px);
+            max-width: 100%;
+            box-sizing: border-box;
+            min-height: 1px
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .cbody {
+            margin-right: auto;
+            margin-left: auto;
+            width: calc(100% - 120px);
+            max-width: 100%;
+            box-sizing: border-box;
+            min-height: 1px;
+        }
+    }
+    
+    @media (min-width: 1256px) {
+        .cbody {
+            margin-right: auto;
+            margin-left: auto;
+            width: 1136px;
+            max-width: 100%;
+            box-sizing: border-box;
+            min-height: 1px;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .signup_form {
+            width: 360px;
+        }
+    }
+
+    .error_next_box {
+        display:block;
+        margin:9px 0 -2px;
+        font-size:12px;
+        line-height: 14px;
+        color:red;
+    }
+    
+    .signup_form {
+        margin: 0 auto;
+        padding-bottom: 50px;
+    }
+    
+    .signup_form h1 {
+        font-size:1.5rem;
+        margin-top:0;
+        margin-bottom:2.5rem;
+        font-weight:500;
+        line-height:1.2;
+    }
+    .form_group {
+        margin: 0 0 30px;
+    }
+    
+    .signup_sns {
+        margin:30px 0;
+        padding-bottom:30px;
+        border-bottom:1px solid #d3d3d3;
+    }
+
+    .signup_sns_title {
+        font-size:12px;
+        text-align:center;
+        margin:15px 0;
+        color:#757575;
+    }
+    .signup_sns_list {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding:0;
+    }
+    .signup_sns_list_item {
+        margin:0 5px;
+    }
+    .signup_form .signup_form_email {
+        width: 100%;
+        margin: 0 0 30px;
+    }
+    
+    .input_email {
+        width: 100%;
+    }
+    
+    .signup_form_label {
+        display: block;
+        margin: 0 0 12px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #292929;
+        line-height: 21px;
+        word-break: keep-all;
+    }
+    
+    .signup_form_input {
+        height: 42px;
+        margin: 10px 0 0;
+        display: flex;
+        flex: 1 0 auto;
+    }
+    
+    .input_email_local {
+        width: 170px;
+        position: relative;
+        flex: 1 1 0px;
+        float: left;
+    }
+    
+    .form_input {
+        width: 100%;
+        border-radius: 4px;
+        transition: border 0.2s, background 0.2s;
+        display: block;
+        padding: 0 15px;
+        line-height: 40px;
+        border: 1px solid #dbdbdb;
+        background-color: #ffffff;
+        color: #424242;
+    }
+    
+    .input_email_seperator {
+        position: relative;
+        width: 20px;
+        flex: 0 0 20px;
+        float: left;
+        text-align: center;
+        font-size: 15px;
+        letter-spacing: -0.4px;
+        line-height: 40px;
+    }
+    
+    .input_email_domain {
+        position: relative;
+        width: 170px;
+        flex: 1 1 0px;
+        float: left;
+    }
+    
+    .input_email_domain select {
+        width: 100%;
+        font-size: 15px;
+        border-radius: 4px;
+        height: 42px;
+    }
+
+    .signup_form_term {
+        border:1px solid #c3c3c3;
+        border-radius: 4px;
+        padding:10px 10px 10px 10px;
+    }
+    .signup_form_term_body {
+        margin:10px 0 0 ;
+    }
+    .signup_form_label {
+        font-size:15px;
+        font-weight: 700;
+        line-height: 21px;
+        word-break:keep-all;
+    }
+
+    .form_check {
+        flex:1 1 auto;
+    }
+
+    .term_all {
+        border-bottom:1px solid #c3c3c3;
+        padding-bottom:18px;
+        margin-bottom:16px;
+    }
+
+    .signup_form_submit {
+        background:orange;
+        color:#ffffff;
+        width:100%;
+        padding:26px 0;
+        font-size:18px;
+        text-align: center;
+        border:none;
+        border-radius:4px;
+        font-weight: 700;
+        transition:background 0.2s;
+    }
+
+    .signup_form_submit:hover {
+        background:rgb(255, 190, 70);
+    }
+    
+       .input_email_local {
+      width: 235px;
+   }
+   #email_chk_btn, #nick_chk_btn{
+      width: 34%;
+      margin-left: 5px;
+         border-radius: 4px;
+         height: 42px;
+         background: #424242;
+
+       color: white;
+       border: 0px;
+   }
+   
+   input#member_nick {
+      width: 235px;
+   }
+   
+   #btn_google {
+      width: 49px;
+       height: 49px;
+       border-radius: 10px;
+   }
+   
+   #pass1, #pass2{
+      font-family: '유토이미지고딕R', 'BBTreeGR', BBTreeGR;
+   }
+   
+   
+   	/*회원정보 수정 content부분*/
+	.edit_member_form_wrap {
+		margin: 0 auto;
+		width: 40%;
+		min-width: 400px !important;
+		margin-top: 100px;
+	    margin-bottom: 136px;
+	}
+	
+	.error_next_box {
+		display: block;
+		margin: 9px 0 -2px;
+		font-size: 12px;
+		line-height: 14px;
+		color: red;
+	}
+	
+	.edit_member_form_div {
+		margin: 0 auto;
+		padding: 20px 0;
+	}
+	
+	.edit_member_form_title {
+		font-size: 1.5rem;
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+		font-weight: 500;
+		line-height: 1.2;
+		color: black;
+	}
+	
+	.edit_member_form_div {
+		width: 100%;
+		margin: 0 0 30px;
+	}
+	
+	.edit_member_form_label {
+		display: block;
+		margin: 0 0 45px;
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 21px;
+		word-break: keep-all;
+	}
+	
+	.edit_member_form_input {
+		height: 42px;
+		margin: 10px 0 0;
+		display: flex;
+		flex: 1 0 auto;
+	}
+	
+	
+	.form_input {
+		width: 100%;
+		border-radius: 4px;
+		transition: border 0.2s, background 0.2s;
+		display: block;
+		padding: 0 15px;
+		line-height: 40px;
+		border: 1px solid #dbdbdb;
+		background-color: #ffffff;
+		color: #424242;
+	}
+	
+
+	/*프로필 관련 시작*/
+	/*************************/
+	.image-upload, .image-upload {
+		display: inline-block;
+		position: relative;
+		max-width: 205px;
+	}
+
+
+
+
+	.edit_form>input, #ADDRESS_ZIP, .edit_form>.col>input {
+		border-radius: 4px;
+	    transition: border 0.2s, background 0.2s;
+	    display: block;
+	    padding: 0 15px;
+	    line-height: 40px;
+	    border: 1px solid #dbdbdb;
+	    background-color: #ffffff;
+	    color: #424242;
+	    width: 215px;
+	}	
+	#nick_chk_btn{
+		width: 34%;
+		margin-left: 5px;
+  		border-radius: 4px;
+  		height: 35px;
+  		background: #3A4B58;
+	    color: white;
+	    border: 0px;
+	}
+	
+	#address_btn {
+		width: 70px;
+		margin-left: 5px;
+  		border-radius: 4px;
+  		height: 35px;
+  		background: #3A4B58;
+	    color: white;
+	    border: 0;
+	}
+	/* ---------------------------- */
+.uploadResult ul{ 
+	background-color:grey; 
+	padding-left: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.uploadResult ul li{
+	list-style: none;
+}
+.uploadResult ul li img,.uploadResultMain ul li img,.uploadResultBanner ul li img{
+	width: 150px;
+	height: 150px;
+	border-radius:100%;
+}

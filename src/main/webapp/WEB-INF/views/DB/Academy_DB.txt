@@ -1,0 +1,103 @@
+CREATE TABLE ACADEMY (
+    CLASS_NUMBER number primary key,
+    WORKSHOP_NUM number,
+    WORKSHOP_NAME varchar2(200),
+    WORKSHOP_PICTURE varchar2(2000),
+    CLASS_DIVISION varchar2(200),
+    CLASS_NAME varchar2(200),
+    CLASS_ABRIEF varchar2(200),
+    CLASS_AMOUNT number,
+    CLASS_DATE date,
+    CLASS_DATE_CONFIGURATION_1 varchar2(200),
+    CLASS_DATE_CONFIGURATION_2 varchar2(200),
+    CLASS_AREA varchar2(200),
+	CLASS_CATEGORY varchar2(200),
+	CLASS_INTRODUCTION_1 varchar2(4000),
+    CLASS_INTRODUCTION_2 varchar2(4000),
+    CLASS_INTRODUCTION_3 varchar2(4000),
+    CLASS_ETC varchar2(200),
+	CLASS_BANNER varchar2(4000),
+	CLASS_IMAGE varchar2(4000),
+	CLASS_ADDRESS varchar2(200),
+    CLASS_DETAIL_ADDRESS varchar2(200),
+    CLASS_COUNT_MEMBER number default 0,
+    CLASS_STATUS number default 0,
+	CLASS_GRADE number(2,1)    
+);
+
+create sequence ACADEMY_SEQ
+  start with 1
+  increment by 1;
+
+/* 수강 강의 */
+CREATE TABLE MY_CLASS (
+	MY_CLASS_NUM NUMBER PRIMARY KEY, /* 수강정보ID */
+	MY_CLASS_MEMBERNUM NUMBER, /* 회원 번호 */
+	MY_CLASS_CLASSNUM NUMBER, /* 강의번호 */
+	MY_CLASS_STATUS NUMBER, /* 상태 */
+	MY_CLASS_AMOUNT VARCHAR2(50), /* 총가격 */
+	MY_CLASS_DATE VARCHAR2(50), /* 구매일 */
+	MY_CLASS_TICKET NUMBER /* 티켓수 */
+);
+
+CREATE SEQUENCE MY_CLASS_SEQ
+    start with 1
+    increment by 1;
+
+
+
+
+
+
+/*강의 리뷰*/ 
+create table CLASS_REVIEW(
+    REVIEW_NUM          NUMBER PRIMARY KEY,
+    REVIEW_MEMBER       NUMBER,
+    REVIEW_CLASS      NUMBER,
+    CONSTRAINT CLASS_REVIEW_NUM FOREIGN KEY (REVIEW_CLASS) 
+        REFERENCES ACADEMY(CLASS_NUMBER)ON DELETE CASCADE, 
+    REVIEW_DATE         DATE,
+    REVIEW_FILE         VARCHAR2(2000),
+    REVIEW_CONTENT      VARCHAR2(1000),
+    REVIEW_GRADE        NUMBER(2,1),
+    REVIEW_RE			NUMBER
+);
+
+/*강의 리뷰 시퀀스*/ 
+create sequence class_review_seq
+    start with 1
+    increment by 1
+    maxvalue 10000;
+    
+    
+    
+//-------------------------------------------    
+/*강의 qna*/     
+create table CLASS_QNA(
+    QNA_NUM			NUMBER PRIMARY KEY,
+    QNA_MEMBER      NUMBER,
+    QNA_CLASS     NUMBER,
+    CONSTRAINT CLASS_QNA_NUM FOREIGN KEY (QNA_CLASS) 
+        REFERENCES ACADEMY(CLASS_NUMBER)ON DELETE CASCADE, 
+    QNA_DATE        DATE,
+    QNA_CONTENT     VARCHAR2(1000),
+    QNA_RE			NUMBER,
+    QNA_STATUS		NUMBER
+);   
+
+/*강의qna 시퀀스*/      
+create sequence class_qna_seq
+    start with 1
+    increment by 1
+    maxvalue 10000;
+   
+      
+
+
+
+
+
+
+
+
+    

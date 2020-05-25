@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 이 xml문서와 맵핑할 인터페이스 경로, 이름 -->
+<mapper namespace="org.nagagu.mapper.OrderMapper">
+	<resultMap type="java.util.HashMap" id="hashmapVO">
+	</resultMap>
+	
+	<!-- 장바구니에 담긴 리스트 -->
+	<insert id="insertBasket">
+		insert into tbl_basket values
+		(seq_basket.nextval,#{basket_memberNum},#{basket_member},#{basket_product},#{basket_color},#{basket_size},#{basket_amount},#{basket_check})	
+	</insert>
+	
+    <!-- 장바구니 갯수 -->
+<!--     <select id="countBasket"  resultType="int">
+		select count(*) as cnt from tbl_basket 
+		where  basket_check=#{basket_check} and basket_member = #{basket_member}
+	</select> -->
+    <select id="countBasket"  resultType="int">
+		select count(*) as cnt from tbl_basket 
+		where  basket_check=#{basket_check} and basket_member = #{basket_member}
+	</select>
+	<!-- 장바구니에 넘어가서 결제대기 리스트 -->
+	<select id="getBasketList" resultMap="hashmapVO" parameterType="org.nagagu.domain.BasketVO">
+      select * 
+      	from tbl_basket,tbl_proBoard
+      where 
+      	basket_member=#{basket_member} and 
+      	basket_check=#{basket_check} and 
+      	basket_product=bno 
+      order by basket_num
+    </select>
+   	<insert id="insertOrder">
+		insert into tbl_order values
+		(#{order_num},#{order_amount},#{order_price},#{order_product},
+		#{order_id},#{order_size},#{order_color},#{order_member},sysdate,
+		#{order_name},#{order_phone},#{order_memo},#{order_address},#{order_state})
+	</insert>
+	<!-- 한개의 주문안에 -->
+	<select id="countOrder"  resultType="int">
+		select count(*) from tbl_order
+		where order_member = #{order_member}
+	</select>
+   	
+    <!-- 장바구니 수량 변경 -->
+	<update id="updateAmount" parameterType="org.nagagu.domain.BasketVO"> 
+		update tbl_basket 
+		set basket_amount =#{basket_amount}
+		where basket_num=#{basket_num}	
+	</update>
+	<!-- 삭제 -->
+   	<delete id="deleteBasket" parameterType="org.nagagu.domain.BasketVO">	
+		delete from tbl_basket where basket_num=#{basket_num}
+	</delete>
+	<!-- 장바구니 상태 변경 -->
+    <update id="updateCheck">  
+		update tbl_basket 
+		set basket_check = #{basket_check}
+		where basket_num=#{basket_num}	
+	</update>
+	<!-- 총 주문안 각 갯수 -->
+    <select id="cntGroupById" parameterType="java.util.HashMap" resultMap="hashmapVO">
+      select 
+      	order_member,order_id,count(order_id) as count 
+      from 
+      	tbl_order 
+      where 
+      	order_member=#{order_member} 
+      group by 
+      	order_id,order_member 
+      order by 
+      	order_id desc
+    </select>
+    <!-- 결제 리스트 -->
+    <select id="getOrderList" resultMap="hashmapVO">
+      select * 
+      	from tbl_proBoard,tbl_order
+      where 
+      	order_member=#{order_member} and order_product=bno
+      	<!-- <if test="order_id != ''">  order_id=#{order_id} and</if> -->
+      order by order_id desc
+    </select>
+     <select id="getOrderListById" parameterType="java.util.HashMap" resultMap="hashmapVO">
+      select * from tbl_order,tbl_proBoard
+      where 
+      	order_product = bno and order_id=#{order_id} 
+      order by 
+      	order_id desc
+    </select>
+
+   
+    
+
+	
+	
+	
+</mapper>

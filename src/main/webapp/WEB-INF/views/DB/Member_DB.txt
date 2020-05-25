@@ -1,0 +1,48 @@
+create table nagagu_member(
+    member_num number PRIMARY key,
+    member_email varchar2(30) UNIQUE,
+    member_pass varchar2(30),
+    member_name varchar2(20),
+    member_nick varchar2(20) UNIQUE,
+    member_phone varchar2(30),
+    member_date DATE,
+    member_picture varchar2(100),
+    member_like_product varchar2(300),
+    member_status number default 0,
+    address_zip number,
+    address_address1 varchar2(50),
+    address_address2 varchar2(50)
+);
+
+create sequence nagagu_member_seq
+    start with 1
+    increment by 1
+    maxvalue 100000;
+    
+insert into nagagu_member (member_num, member_email, member_name, member_nick, member_phone)
+values(nagagu_member_seq.NEXTVAL, nagagu_member_seq.currval||'@naver.com', '아무개', nagagu_member_seq.currval||'번째 닉네임', nagagu_member_seq.currval||'-1234-5678');
+
+    
+    
+create table delete_member(
+    member_num number,
+    member_email varchar2(30) UNIQUE,
+    member_pass varchar2(30),
+    member_name varchar2(20),
+    member_nick varchar2(20) UNIQUE,
+    member_phone varchar2(30),
+    member_date DATE,
+    member_picture varchar2(100),
+    member_like_product varchar2(300),
+    member_status number default 0,
+    address_zip number,
+    address_address1 varchar2(50),
+    address_address2 varchar2(50),
+    delete_sysdate DATE
+);
+
+
+
+insert into nagagu_member (member_num, member_email, member_name, member_nick, member_phone)
+values(nagagu_member_seq.NEXTVAL, nagagu_member_seq.currval||'yoa23na@daum.com', '김기자', '기재욥', '011-2234-5678');
+

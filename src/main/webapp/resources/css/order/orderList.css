@@ -1,0 +1,43 @@
+.output b{
+	margin-left:15px;
+}
+.main-output {
+	font-weight: 700;
+	margin-top: 15px;
+}
+.category *{
+   color: rgb(0, 0, 0, 0.6);  
+}
+.category{
+	border-bottom: 1px solid rgba(239,144,14,0.3);
+	color: rgb(0, 0, 0, 0.2) !important;
+}.category *{
+	text-align: center;
+}
+.values *{
+	margin-top: 10px;
+	text-align: center;
+}
+.values b{
+	margin: 0 auto;
+}
+.values {
+	border-bottom: 1px solid grey;
+	border-color: rgba(0, 0, 0, 0.2);
+} 
+   .price_wrap div{
+   	margin-top: 0px;
+   }
+.order_tab{ 
+	margin-top: 10px;
+	margin-left: 0px;
+	margin-bottom: 10px; 
+} 
+.order_tab i{
+	padding-left: 15px;
+}
+.each-row, .each-row div{
+	margin-top:5px;
+	margin-bottom: 5px;
+	padding-left: 8px;
+}	

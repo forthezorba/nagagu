@@ -1,0 +1,111 @@
+서버주소
+<Context docBase="C:/Project138/upload/" path="/communityupload/image/" reloadable="true"/>
+<Context docBase="C:/Project138/upload/" path="/productupload/image/" reloadable="true"/>
+
+/****************************** MEMBER  *************************/
+
+Drop table nagagu_member;
+Drop sequence nagagu_member_seq;
+Drop table delete_member;
+
+Select * from nagagu_member;
+Select * from delete_member;
+
+/**************************** WORKSHOP_MEMBER ********************/
+
+Drop table nagagu_workshop_member;
+Drop sequence nagagu_workshop_member_seq;
+Drop table delete_wrokshop_member;
+
+select * from nagagu_workshop_member;
+
+/*************************** ACADEMY *********************/
+
+Drop table ACADEMY;
+Drop sequence ACADEMY_SEQ;
+Drop table my_class;
+Drop sequence my_class_seq;
+Drop table CLASS_REVIEW;
+Drop sequence class_review_seq;
+Drop table CLASS_QNA;
+Drop sequence class_qna_seq;
+
+select * from academy;
+select * from my_class;
+
+/************************ PICS ***************************/
+
+Drop table pics;
+drop sequence seq_pics_ref;
+drop table member_like;
+drop sequence seq_member_like;
+drop table follow;
+drop sequence seq_follow;
+drop table pics_comment;
+
+select * from pics;
+select * from member_like;
+select * from follow;
+select * from pics_comment;
+
+/************************* STORE **********************/
+
+drop table product_review;
+drop sequence store_review_seq;
+drop table product_qna;
+drop sequence store_qna_seq;
+DROP table product;
+drop sequence product_seq;
+drop table member_like;
+drop sequence seq_member_like;
+
+drop table basket;
+drop sequence seq_basket;
+drop table product_order;
+drop sequence seq_product_order;
+
+select * from product;
+select * from product_review;
+select * from product_qna;
+
+select * from basket;
+select * from product_order;
+
+/************************* ESTIMATE *********************/
+
+drop table estimate;
+drop sequence estimate_seq;
+drop table estimate_offer;
+drop sequence estimate_offer_seq;
+drop table estimate_order;
+drop sequence estimate_order_seq;
+
+select * from estimate;
+select * from estimate_offer;
+select * from estimate_order;
+
+/*********************** MYPAGE ***************************/
+
+drop table chatroom;
+drop sequence chat_msg_seq;
+drop table chat_message;
+drop table note;
+drop sequence note_num_seq;
+
+select * from chatroom; 
+select * from chat_message;
+select * from note;
+
+/*********************** ADMIN ***************************/
+
+drop table admin_member;
+drop sequence admin_member_seq;
+
+select * from admin
+
+insert into admin_member values (
+    1, 'admin', 'admin', '愿�由ъ옄', '010-5144-9279', sysdate
+);
+
+commit;
+

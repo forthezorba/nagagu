@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nagagu.mapper.MemberMapper">
+
+<resultMap type="org.nagagu.domain.MemberVO" id="memberMap">
+	<id property="member_id" column="member_id"/>
+	<result property="member_id" column="member_id"/>
+	<result property="member_pass" column="member_pass"/>
+	<result property="member_email" column="member_email"/>
+	<result property="member_name" column="member_name"/>
+	<result property="member_nick" column="member_nick"/>
+	<result property="member_phone" column="member_phone"/>
+	<result property="member_date" column="member_date"/>
+	<result property="member_picture" column="member_picture"/>
+	<result property="member_like_product" column="member_like_product"/>
+	<result property="member_status" column="member_status"/>
+	<result property="address_zip" column="address_zip"/>
+	<result property="address_address1" column="address_address1"/>
+	<result property="address_address2" column="address_address2"/>
+	<result property="member_num" column="member_num"/>
+	<collection property="authList" resultMap="authMap"/>
+</resultMap>
+
+<resultMap type="org.nagagu.domain.AuthVO" id="authMap">
+	<result property="member_id" column="member_id"/>
+	<result property="auth" column="auth"/>
+</resultMap>
+
+<select id="read" resultMap="memberMap">
+	select mem.member_id,member_num, member_pass, member_name,member_nick,member_phone,member_date,member_picture
+	,member_status,address_zip,address_address1,address_address2,member_license
+	,auth
+	from tbl_nagagu_member mem left outer join tbl_nagagu_member_auth auth on mem.member_id=auth.member_id
+	where mem.member_id = #{userid}
+</select>
+
+<insert id="insert_member">
+      insert into tbl_nagagu_member
+      (member_id,member_num, member_pass, member_name,member_nick,member_phone,member_date,member_picture
+		,address_zip,address_address1,address_address2,member_license) 
+      values 
+      (#{member_id},seq_nagagu_member.nextval, #{member_pass}, #{member_name}, #{member_nick},#{member_phone},sysdate,#{member_picture}, 
+      #{address_zip},#{address_address1},#{address_address2},#{member_license})
+</insert>
+<update id="update_member">
+		<!-- update tbl_nagagu_member set member_status = 1 where member_email = #{MEMBER_EMAIL} -->
+		update tbl_nagagu_member 
+		set 
+		member_name=#{member_name},
+		member_nick=#{member_nick},
+		member_phone=#{member_phone},
+		member_picture=#{member_picture},
+		address_zip=#{address_zip},
+		address_address1=#{address_address1},
+		address_address2=#{address_address2}		
+		where member_id = #{member_id}
+</update>
+
+<insert id="insert_auth">
+      insert into tbl_nagagu_member_auth
+      (member_id,auth) 
+      values 
+      (#{member_id},#{auth})
+</insert>
+<update id="emailLink_chk">
+		<!-- update tbl_nagagu_member set member_status = 1 where member_email = #{MEMBER_EMAIL} -->
+		update tbl_nagagu_member set member_status = 1 where member_id = #{member_id}
+</update>
+<select id="email_chk" resultType="int">
+	select count(*) from tbl_nagagu_member where member_id= #{member_id}
+</select>
+<select id="nickname_chk" resultType="int">
+	select count(*) from tbl_nagagu_member where member_nick = #{member_nick}
+</select>
+<select id="status_chk" resultType="int">
+	select member_status from tbl_nagagu_member where member_id = #{member_id}
+</select>
+
+</mapper>
+

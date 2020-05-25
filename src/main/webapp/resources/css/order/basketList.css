@@ -1,0 +1,67 @@
+.sidebar {
+	width: 25%;
+}
+.sidebar {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 10;
+}
+.basketmain {
+	width: 75%;
+	height: auto;
+	margin-top: 30px;
+	min-height: 75vh;
+}
+.each-row {
+	margin-bottom: 15px;
+	border-bottom: 1px solid black;
+	border-color: rgba(0, 0, 0, 0.2);
+}
+.each-row img {
+	align-self: center;
+	width: 100px;
+	height: 100px;
+}
+.sidebarOutput {
+	margin-top: 25px;
+	min-height: 25vh;
+}
+.btn_check_all {
+	margin-right: 35px;  
+}
+.sidebar {
+	margin-top: 70px;
+	background-color: rgba(0, 0, 0, 0.1);
+	height: 30vh;
+}
+.each-row .category{
+    padding-top: 5px;  
+	padding-bottom: 5px;  
+}    
+.category *{
+     align-self: center;
+     text-align: center;
+     color: rgb(0, 0, 0, 0.6);  
+}
+.values *{
+	margin-top: 10px;
+	text-align: center;
+}
+.totalShipPrice,.totalPayPrice,.totalPrice{
+	padding-right:35px !important;
+}
+.category .btn_wrap{
+    text-align: right !important;
+}
+.sidebar .line{ 
+    border-top: 1px solid white;
+}
+.forcss{
+    font-size:1.2rem;
+}
+.basket_wrapper{
+    font-weight: 700;
+}
+.price_wrap div{
+	margin-top: 0px;
+}

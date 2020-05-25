@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.memberMapper">
+	<resultMap type="com.spring.member.MemberVO" id="memberResultMap">
+		<result property="MEMBER_NUM" column="MEMBER_NUM" />
+		<result property="MEMBER_EMAIL" column="MEMBER_EMAIL" />
+		<result property="MEMBER_PASS" column="MEMBER_PASS" />
+		<result property="MEMBER_NAME" column="MEMBER_NAME" />
+		<result property="MEMBER_NICK" column="MEMBER_NICK" />
+		<result property="MEMBER_PHONE" column="MEMBER_PHONE" />
+		<result property="MEMBER_DATE" column="MEMBER_DATE" />
+		<result property="MEMBER_PICTURE" column="MEMBER_PICTURE" />
+		<result property="MEMBER_LIKE_PRODUCT" column="MEMBER_LIKE_PRODUCT" />
+		<result property="MEMBER_STATUS" column="MEMBER_STATUS" />		
+		<result property="ADDRESS_ZIP" column="ADDRESS_ZIP" />		
+		<result property="ADDRESS_ADDRESS1" column="ADDRESS_ADDRESS1" />		
+		<result property="ADDRESS_ADDRESS2" column="ADDRESS_ADDRESS2" />		
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="hashmapVO">
+		<result property="MEMBER_NUM" column="MEMBER_NUM" />	
+		<result property="MEMBER_EMAIL" column="MEMBER_EMAIL" />	
+		<result property="MEMBER_PASS" column="MEMBER_PASS" />	
+		<result property="MEMBER_NAME" column="MEMBER_NAME" />	
+		<result property="MEMBER_NICK" column="MEMBER_NICK" />	
+		<result property="MEMBER_PHONE" column="MEMBER_PHONE" />	
+		<result property="MEMBER_DATE" column="MEMBER_DATE" />	
+		<result property="MEMBER_PICTURE" column="MEMBER_PICTURE" />	
+		<result property="MEMBER_LIKE_PRODUCT" column="MEMBER_LIKE_PRODUCT" />		
+		<result property="MEMBER_STATUS" column="MEMBER_STATUS" />
+		<result property="ADDRESS_ZIP" column="ADDRESS_ZIP" />		
+		<result property="ADDRESS_ADDRESS1" column="ADDRESS_ADDRESS1" />		
+		<result property="ADDRESS_ADDRESS2" column="ADDRESS_ADDRESS2" />
+	</resultMap>
+	
+	<resultMap type="com.spring.member.DeleteMemberVO" id="deletememberResultMap">
+		<result property="MEMBER_NUM" column="MEMBER_NUM" />
+		<result property="MEMBER_EMAIL" column="MEMBER_EMAIL" />
+		<result property="MEMBER_PASS" column="MEMBER_PASS" />
+		<result property="MEMBER_NAME" column="MEMBER_NAME" />
+		<result property="MEMBER_NICK" column="MEMBER_NICK" />
+		<result property="MEMBER_PHONE" column="MEMBER_PHONE" />
+		<result property="MEMBER_DATE" column="MEMBER_DATE" />
+		<result property="MEMBER_PICTURE" column="MEMBER_PICTURE" />
+		<result property="MEMBER_LIKE_PRODUCT" column="MEMBER_LIKE_PRODUCT" />
+		<result property="MEMBER_STATUS" column="MEMBER_STATUS" />		
+		<result property="ADDRESS_ZIP" column="ADDRESS_ZIP" />		
+		<result property="ADDRESS_ADDRESS1" column="ADDRESS_ADDRESS1" />		
+		<result property="ADDRESS_ADDRESS2" column="ADDRESS_ADDRESS2" />		
+		<result property="DELETE_SYSDATE" column="DELETE_SYSDATE" />		
+	</resultMap>
+	
+	
+	<select id="nickname_chk" resultMap="memberResultMap">
+		select * from nagagu_member where member_nick = #{MEMBER_NICK}
+	</select>
+	
+	<select id="email_chk" resultMap="memberResultMap">
+		select * from nagagu_member where member_email = #{MEMBER_EMAIL}
+	</select>
+	
+	<update id="emailLink_chk" parameterType="com.spring.member.MemberVO">
+		update nagagu_member set member_status = 1 where member_email = #{MEMBER_EMAIL}
+	</update>
+	
+	<insert id="insert_member" parameterType="com.spring.member.MemberVO">
+		<selectKey resultType="int" keyProperty="MEMBER_NUM" order="BEFORE">
+           SELECT nagagu_member_seq.nextval FROM dual        
+       </selectKey>
+	      insert into nagagu_member(member_num, member_email, member_pass, member_name,
+	       member_nick, member_date, member_picture, member_phone) 
+	      values (#{MEMBER_NUM}, #{MEMBER_EMAIL}, #{MEMBER_PASS}, #{MEMBER_NAME}, #{MEMBER_NICK}, SYSDATE, #{MEMBER_PICTURE}, #{MEMBER_PHONE})
+	</insert>
+	
+	<insert id="insert_sns_member" parameterType="com.spring.member.MemberVO">
+		<selectKey resultType="int" keyProperty="MEMBER_NUM" order="BEFORE">
+           SELECT nagagu_member_seq.nextval FROM dual        
+       </selectKey>
+	      insert into nagagu_member(member_num, member_email, member_pass, member_name,
+	       member_nick, member_picture, member_status, member_date) 
+	      values (#{MEMBER_NUM}, #{MEMBER_EMAIL}, #{MEMBER_PASS}, #{MEMBER_NAME},
+	       #{MEMBER_NICK}, #{MEMBER_PICTURE}, #{MEMBER_STATUS}, SYSDATE)
+	</insert>
+	
+	<select id="user_chk" resultMap="memberResultMap">
+		select * from nagagu_member where member_email = #{MEMBER_EMAIL} and member_pass = #{MEMBER_PASS}
+	</select>
+	<select id="member_status_chk" resultType="int">
+		select member_status from nagagu_member where member_email = #{MEMBER_EMAIL}
+	</select>
+	
+	<select id="nick_list" resultMap="memberResultMap">
+		select member_nick from nagagu_member
+	</select>
+	
+	<select id="selectMember" parameterType="com.spring.member.MemberVO" resultMap="memberResultMap">
+		select * from nagagu_member where member_email = #{MEMBER_EMAIL}
+	</select>
+	
+	
+	<!-- 멤버 리스트(커뮤니티 사진의 멤버리스트) 경태형 --> 
+	<select id="getMemberList" parameterType="java.util.HashMap" resultMap="memberResultMap">	
+ 		SELECT *
+		FROM PICS P, NAGAGU_MEMBER M
+		WHERE P.PICS_MEMBER = M.MEMBER_NUM
+        ORDER BY P.PICS_DATE DESC
+        <!-- <![CDATA[ WHERE rnum >= #{startrow} AND rnum <= #{endrow} ]]> --> 
+	</select>
+	
+	<select id="getMemberDetail" parameterType="com.spring.member.MemberVO" resultMap="memberResultMap">
+		SELECT * FROM nagagu_member WHERE MEMBER_NUM =#{MEMBER_NUM}
+	</select>
+
+
+	<!-- 기재형 쪽 멤버 메퍼 -->
+	<select id="getMember" parameterType="String" resultMap="memberResultMap">
+		select member_email, member_nick, member_picture from nagagu_member where member_email=#{MEMBER_EMAIL}
+	</select>
+	
+	<select id="countMember" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM nagagu_member WHERE member_email=#{MEM_MAIL}
+	</select>
+	
+	<select id="countWorkshop" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM nagagu_workshop_member WHERE workshop_email=#{MEM_MAIL}
+	</select>
+
+	<select id="getMemberDetailbyEmail" parameterType="com.spring.member.MemberVO" resultMap="memberResultMap">
+		SELECT * FROM nagagu_member WHERE MEMBER_EMAIL=#{MEMBER_EMAIL}
+	</select>
+	
+
+	<!-- 회원탈퇴용 매퍼 -->
+	<insert id="duplicateMember" parameterType="com.spring.member.MemberVO">
+	INSERT INTO delete_member(MEMBER_NUM, MEMBER_EMAIL, MEMBER_PASS, MEMBER_NAME, MEMBER_NICK, MEMBER_PHONE, MEMBER_DATE, MEMBER_PICTURE,
+									   MEMBER_LIKE_PRODUCT, MEMBER_STATUS, ADDRESS_ZIP, ADDRESS_ADDRESS1, ADDRESS_ADDRESS2)
+		SELECT MEMBER_NUM, MEMBER_EMAIL, MEMBER_PASS, MEMBER_NAME, MEMBER_NICK, MEMBER_PHONE, MEMBER_DATE, MEMBER_PICTURE,
+									   MEMBER_LIKE_PRODUCT, MEMBER_STATUS, ADDRESS_ZIP, ADDRESS_ADDRESS1, ADDRESS_ADDRESS2
+		from nagagu_member
+		where MEMBER_EMAIL = #{MEMBER_EMAIL} AND MEMBER_PASS = #{MEMBER_PASS}
+	</insert>
+	
+	<update id="sysdateMember" parameterType="com.spring.member.MemberVO">
+		UPDATE delete_member SET delete_sysdate = SYSDATE 
+		where MEMBER_EMAIL = #{MEMBER_EMAIL} AND MEMBER_PASS = #{MEMBER_PASS}
+	</update>
+	
+	<delete id="deleteMember" parameterType="com.spring.member.MemberVO">
+		DELETE FROM nagagu_member 
+		WHERE member_email = #{MEMBER_EMAIL} AND member_pass = #{MEMBER_PASS}
+	</delete>
+	
+	
+	<select id="findMemberPW" parameterType="com.spring.member.MemberVO" resultType="int">
+		select COUNT(*) from nagagu_member where member_email = #{MEMBER_EMAIL} AND member_name = #{MEMBER_NAME}
+	</select>
+	
+	<update id="updateMemberPW" parameterType="com.spring.member.MemberVO">
+		update nagagu_member set member_pass = #{MEMBER_PASS} where member_email = #{MEMBER_EMAIL}
+	</update>
+	
+	<select id="lastPwUpdate" parameterType="String" resultType="int">
+		select COUNT(*) from nagagu_member where member_email = #{member_email} and member_pass = #{pass1}
+	</select>
+	
+	<select id="findMemberEmail" parameterType="com.spring.member.MemberVO" resultMap="memberResultMap">
+		select * from nagagu_member where member_name = #{MEMBER_NAME} AND member_phone = #{MEMBER_PHONE}
+	</select>
+</mapper>

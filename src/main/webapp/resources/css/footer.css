@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+#footer2 {
+	position:static;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width:100%;
+/* 	z-index:1;  */
+	text-align:center; 
+	font-size:14px; 
+	font-weight:300;
+	background: #1B1B27;
+}
+.copyright {
+	max-width:1200px; 
+	padding:40px 0 0 0; 
+	margin:0 auto; 
+	overflow:hidden;
+}
+.copyright ul { overflow:hidden; }
+.copyright li {
+	display:inline-block;
+	color:#d0d0d0; 
+	line-height:22px; 
+}
+.copyright .sns li { margin:0 20px 30px 0; }
+.copyright a { color:#d0d0d0; }
+.copyright .line { 
+	color:#d3d3d3;
+	margin:0 10px; 
+}
+#footer2 .copy { 
+	clear:both; 
+	display:block; 
+	margin-top:10px; 
+}
+#footer2 .sns img { 
+	opacity:0.7;
+	transition: all 0.3s ease-in;
+}
+#footer2 .sns img:hover { opacity:1; }
+
+@media only screen and (max-width:1220px) {
+    #footer{font-size:12px;}
+    .copyright{padding:15px 0;}
+    .copyright .sns{display:none;}
+}
+
+li a {
+	color: #d3d3d3;
+}
+
+#pass, #WORKSHOP_PASS {
+	font-family: '유토이미지고딕R', 'BBTreeGR', BBTreeGR;
+}

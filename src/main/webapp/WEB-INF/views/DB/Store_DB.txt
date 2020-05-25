@@ -1,0 +1,132 @@
+
+/*상품테이블*/
+create table PRODUCT (
+    PRODUCT_NUM                 NUMBER PRIMARY KEY,
+    PRODUCT_WORKSHOP            NUMBER,
+    PRODUCT_SHOPNAME            VARCHAR2(50),
+    PRODUCT_DATE                DATE,
+    PRODUCT_TITLE               VARCHAR2(100),
+    PRODUCT_BRIEF               VARCHAR2(100),
+    PRODUCT_CATEGORY            VARCHAR2(30),
+    PRODUCT_PRICE               NUMBER,
+    PRODUCT_GRADE               NUMBER(2,1),
+    PRODUCT_READ                NUMBER,
+    PRODUCT_SALES               NUMBER,
+    PRODUCT_LIKE                NUMBER,
+    PRODUCT_COLOR               VARCHAR2(50),
+    PRODUCT_SIZE                VARCHAR2(50),
+    PRODUCT_INFO                VARCHAR2(4000),
+    PRODUCT_SHIP_PRICE          NUMBER,
+    PRODUCT_SHIP_COMPANY        VARCHAR2(20),
+    PRODUCT_SHIP_RETURN_PRICE   NUMBER,
+    PRODUCT_SHIP_CHANGE_PRICE   NUMBER,
+    PRODUCT_SHIP_RETURN_PLACE   VARCHAR2(20),
+    PRODUCT_SHIP_DAYS           VARCHAR2(20),
+    PRODUCT_SHIP_INFO           VARCHAR2(4000),
+    PRODUCT_AS_INFO             VARCHAR2(4000),
+    PRODUCT_RETURN_INFO         VARCHAR2(4000),
+    PRODUCT_STORE_INFO          VARCHAR2(4000),
+    PRODUCT_BANNER              VARCHAR2(4000),
+    PRODUCT_IMAGE               VARCHAR2(4000),
+    PRODUCT_STATUS              NUMBER,
+    PRODUCT_STOCK				NUMBER
+);
+
+//PRODUCT_STATUS - 1:판매중 2:판매완료 0:품절
+
+
+/*상품시퀀스*/ 
+create sequence product_seq
+    start with 1
+    increment by 1
+    maxvalue 10000;
+
+//-------------------------------------------    
+
+/*상품 리뷰*/ 
+create table PRODUCT_REVIEW(
+    REVIEW_NUM          NUMBER PRIMARY KEY,
+    REVIEW_MEMBER       NUMBER,
+    REVIEW_PRODUCT      NUMBER,
+    CONSTRAINT PRODUCT_REVIEW_NUM FOREIGN KEY (REVIEW_PRODUCT) 
+        REFERENCES PRODUCT(PRODUCT_NUM)ON DELETE CASCADE, 
+    REVIEW_DATE         DATE,
+    REVIEW_FILE         VARCHAR2(2000),
+    REVIEW_CONTENT      VARCHAR2(1000),
+    REVIEW_GRADE        NUMBER(2,1),
+    REVIEW_RE			NUMBER
+);
+
+/*상품 리뷰 시퀀스*/ 
+create sequence store_review_seq
+    start with 1
+    increment by 1
+    maxvalue 10000;
+    
+    
+    
+//-------------------------------------------    
+/*상품 qna*/     
+create table PRODUCT_QNA(
+    QNA_NUM			NUMBER PRIMARY KEY,
+    QNA_MEMBER      NUMBER,
+    QNA_PRODUCT     NUMBER,
+    CONSTRAINT PRODUCT_QNA_NUM FOREIGN KEY (QNA_PRODUCT) 
+        REFERENCES PRODUCT(PRODUCT_NUM)ON DELETE CASCADE, 
+    QNA_DATE        DATE,
+    QNA_CONTENT     VARCHAR2(1000),
+    QNA_RE			NUMBER,
+    QNA_STATUS		NUMBER
+);   
+
+/*상품qna 시퀀스*/      
+create sequence store_qna_seq
+    start with 1
+    increment by 1
+    maxvalue 10000;
+   
+      
+//-------------------------------------------    
+/*커뮤니티, 상품 공통*/
+/* 좋아요 */
+CREATE TABLE MEMBER_LIKE (
+	LIKE_NUM NUMBER NOT NULL, /* 좋아요 ID */
+	LIKE_MEMBER NUMBER, /* 회원 번호 */
+	LIKE_PICS NUMBER, /* 사진 ID */
+    LIKE_PRODUCT NUMBER /* 사진 ID */
+);
+
+/*좋아요 시퀀스*/
+CREATE SEQUENCE SEQ_MEMBER_LIKE
+    START WITH 1
+    INCREMENT BY 1;
+    
+/* 장바구니 */
+CREATE TABLE BASKET (
+	BASKET_NUM NUMBER PRIMARY KEY, /* 장바구니 ID */
+	BASKET_MEMBER NUMBER, /* 회원 번호 */
+	BASKET_PRODUCT NUMBER, /* 완제품 ID */
+	BASKET_COLOR VARCHAR2(100),
+	BASKET_SIZE	VARCHAR2(100),
+	BASKET_OPTION VARCHAR2(100), 
+	BASKET_AMOUNT NUMBER, /* 수량 */
+	BASKET_CHECK NUMBER default 0 /* 0디폴트 1결제단계(주문결제폼 위해) 2결제완료(삭제위해) */
+);
+CREATE SEQUENCE SEQ_BASKET
+  start with 1
+  increment by 1;    
+  
+  /* 완제품 주문 목록 */
+CREATE TABLE PRODUCT_ORDER (
+	ORDER_NUM NUMBER PRIMARY KEY, /* 주문 목록 ID(장바구니 NUM) */
+	ORDER_MEMBER NUMBER, /* 회원 번호 */
+	ORDER_PRICE NUMBER, /* 총가격 */
+    ORDER_DATE DATE, /* 주문일자 */
+	ORDER_AMOUNT VARCHAR2(100), /* 수량 */
+	ORDER_PERSON VARCHAR2(30), /* 수령인 */
+	ORDER_MEMO VARCHAR2(200), /* 메모 */
+	ORDER_METHOD VARCHAR2(30), /* 결제방법 */
+	ORDER_STATE NUMBER default 0, /* 주문상태 */
+	ORDER_ADDRESS VARCHAR2(100),
+	ORDER_PHONE VARCHAR2(100)
+);

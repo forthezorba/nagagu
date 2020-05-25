@@ -1,0 +1,18 @@
+create table ADMIN_MEMBER (
+    ADMIN_NUM number primary key,
+    ADMIN_ID varchar2(100),
+    ADMIN_PASS varchar2(100),
+    ADMIN_NAME varchar2(100),
+    ADMIN_PHONE varchar2(100),
+    ADMIN_DATE date
+);
+
+create sequence ADMIN_MEMBER_SEQ
+    start with 1
+    increment by 1;
+    
+insert into admin_member values (
+    1, 'admin', 'admin', '관리자', '010-5144-9279', sysdate
+);
+
+commit;

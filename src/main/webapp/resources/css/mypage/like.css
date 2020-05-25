@@ -1,0 +1,25 @@
+.tab-content .tab-pane.active {
+	display: flex;
+	margin-left:0;
+}
+img {
+	width: 100%;
+	height: auto;
+}
+.picOutput{
+	padding-left: 0px !important;
+	margin-bottom: 50px;
+}
+.picOutput img{
+	border-radius: 10px;
+}
+.tab_wrap{
+	margin-bottom: 20px;
+}
+.tab_wrap .nav-item{
+	font-weight:800 !important;
+	font-size: 1.5em;	  
+}
+.card{
+	width: -webkit-fill-available; 
+}

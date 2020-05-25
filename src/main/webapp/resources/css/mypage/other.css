@@ -1,0 +1,132 @@
+/* card size */
+@media ( max-width : 576px) {
+	.sidebar{
+		position: absolute ;
+		top: 180px !important;
+		left: 40%; 
+	}
+	.nickNameTap{
+		display: none !important;  
+	}
+	.card-group { 
+		font-size: 1rem; 
+	} 
+	.card-header, .card-body, .card-footer {
+		padding: 3px !important; 
+	}
+	.card-group img{
+		width: 50%;
+		height: auto; 
+		border-radius:100%;		 
+	} 
+	.othermain{
+		margin-top: 150px;
+		width: 100% !important;
+	}
+}
+
+@media ( max-width : 768px) {
+	.sidebar{
+		position: absolute ;
+		top: 130px ;
+		left: 40%; 
+	}
+	.nickNameTap{
+		display: none !important;  
+	}
+	.card-group {
+		font-size: 1rem; 
+	} 
+	.card-header, .card-body, .card-footer {
+		padding: 3px !important; 
+	}
+	.card-group img{
+		width: 50%;
+		height: auto; 
+		border-radius:100%;		 
+	} 
+	.othermain{
+		margin-top: 150px;
+		width: 100% !important;
+	}
+}
+
+@media ( min-width : 768px) {
+	.sidebar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+	}
+	.card-group {
+		font-size: 1rem; 
+	} 
+	.card-header, .card-body, .card-footer {
+		padding: 3px !important;
+	}
+	.card-group img{
+		width: 50%;
+		height: auto; 
+		border-radius:100%;		 
+	}
+}
+
+@media ( min-width : 992px) {
+	.card-group {
+		width: 180px !important;
+		font-size: 1.2rem;
+	}
+	.card-header, .card-body, .card-footer {
+		padding: 10px !important; 
+	}
+	.card-group img{
+		width: 60%;
+		height: auto; 
+		border-radius:100%;		 
+	}
+}
+
+@media ( min-width : 1200px) {
+	.card-group{
+		width: 200px !important;  
+		font-size: 1.5rem;
+	}
+	.card-group img{
+		width: 120px;
+		height: 120px; 
+		border-radius:100%;		 
+	}
+}
+/* card-size end */
+a, .card a:link, .card a:visited {
+	color: white;
+	text-decoration: none !important;
+}
+.nickNameTap a, .title a{
+	color: black;
+}
+.othermain {
+	width: 75%;
+}
+
+.sidebar {
+	width: 25%;
+	height: 25vh;
+}
+
+.like-wrap, .pics-wrap{
+	border-top: 1px solid black;
+	border-color: rgba(0, 0, 0, 0.1);
+	margin-top: 30px;
+}
+.img-wrap{ 
+	padding-left:15px;
+}
+.img-wrap img{
+	border-radius:10px; 
+	width: 100%;
+	height: 250px; 
+	margin: 20px 0 !important;  
+}
+.container-mypage{
+	padding: 50px 0;
+}

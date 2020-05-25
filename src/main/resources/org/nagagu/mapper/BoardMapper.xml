@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nagagu.mapper.BoardMapper">
+
+	<resultMap type="org.nagagu.domain.BoardVO" id="memberMap">
+		<result property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writer" column="writer" />
+		<result property="writer_picture" column="writer_picture" />
+		<result property="nick" column="nick" />
+		<result property="tags" column="tags" />
+		<result property="category" column="category" />
+		<result property="regdate" column="regdate" />
+		<result property="updateDate" column="updatedate" />		
+		<result property="replyCnt" column="replyCnt" />		
+		<result property="liekCnt" column="liekCnt" />		
+		<result property="readCnt" column="readCnt" />		
+		<result property="isReview" column="isReview" />		
+		<result property="mainImage" column="mainImage" />		
+		<result property="prodcutNo" column="prodcutNo" />		
+	</resultMap>
+
+<select id="getListByWriter" resultMap="memberMap">
+<![CDATA[
+select * from tbl_cmBoard where writer=#{writer}
+]]>
+</select>
+<sql id="criteria">
+	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'G'.toString()">
+						tags like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'T'.toString()">
+						title like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'C'.toString()">
+						content like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'W'.toString()">
+						nick like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+	<if test="isReview != 0">  isReview=#{isReview} AND</if>
+	<if test="category != 'all'">  category=#{category} AND</if>
+</sql> 
+<select id="getListWithPaging" resultMap="memberMap">
+<![CDATA[
+select 
+bno,title,content,writer,writer_picture,nick,tags,category,regdate,updatedate,replyCnt,likeCnt,readCnt,isreview,mainimage,productno
+from
+	(select 
+	/*+ index_desc(tbl_cmBoard pk_cmBoard) */
+	rownum rn, bno,title,content,writer,writer_picture,nick,tags,category,regdate,updatedate,replyCnt,likeCnt,readCnt,isreview,mainimage,productno
+	from tbl_cmBoard
+	where 
+]]>
+	<include refid="criteria"></include>
+<![CDATA[
+	rownum <= #{pageNum}*#{amount}
+]]>
+<if test="sort != null"> ORDER BY #{sort} DESC </if>
+<![CDATA[
+)
+where rn>(#{pageNum}-1) * #{amount}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+select count(*)	from tbl_cmBoard where 
+<include refid="criteria"></include>
+bno >0
+</select>
+
+<select id="read" resultMap="memberMap">
+select * from tbl_cmBoard where bno=#{bno}
+</select>
+<update id="updateCnt">
+	update tbl_cmBoard 
+	set readCnt = readCnt + 1
+	where bno=#{bno}
+</update>
+<select id="getPics" resultType="org.nagagu.domain.BoardVO"> 
+select bno,mainImage from tbl_cmBoard where writer=#{writer} order by updateDate desc
+</select>
+
+
+
+<insert id="insert">
+	insert into tbl_cmBoard(bno, title, content, writer,writer_picture,nick,tags,category,isreview,mainimage,productno)
+	values (seq_cmboard.nextval,#{title},#{content},#{writer},#{writer_picture},#{nick},#{tags},#{category},#{isreview},#{mainimage},#{productno})
+</insert>
+
+<insert id="insertSelectKey"> 
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		select seq_cmBoard.nextval from dual
+	</selectKey>
+	insert into tbl_cmBoard(bno, title, content, writer,writer_picture,nick,tags,category,isReview,mainImage,productNo)
+	values (#{bno},#{title},#{content},#{writer},#{writer_picture},#{nick},#{tags},#{category},#{isReview},#{mainImage},#{productNo})
+</insert>
+
+
+<delete id="delete">
+	delete from tbl_cmBoard where bno=#{bno}
+</delete>
+<update id="update">
+	update tbl_cmBoard
+	set title=#{title},
+		content=#{content},
+		writer=#{writer},
+		writer_picture=#{writer_picture},
+		tags=#{tags},
+		category=#{category},
+		isReview=#{isReview},
+		mainImage=#{mainImage},
+		productNo=#{productNo},
+		updatedate=sysdate
+	where bno=#{bno}
+</update>
+<update id="updateReplyCnt">
+	update tbl_cmBoard 
+	set replycnt = replycnt + #{amount}
+	where bno=#{bno}
+</update>
+
+</mapper>

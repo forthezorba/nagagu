@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="customLoginSuccess" class="org.nagagu.security.CustomLoginSuccessHandler"></bean>
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 
+	<bean id="customUserDetailsService"	class="org.nagagu.security.CustomUserDetailsService"></bean>
+	
+	<security:http>
+		<!--인터셉터 
+		<security:intercept-url pattern="/sample/all" access="permitAll" />
+		<security:intercept-url pattern="/community/register" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/product/register" access="hasRole('ROLE_WORKSHOP')" />
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" /> -->
+		
+		<security:access-denied-handler error-page="/accessError"/>
+<!-- 		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/> -->
+		<security:form-login login-page="/customLogin"/>
+
+				
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+		
+		<!-- 로그아웃(세션무효화,쿠키삭제) -->
+		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" />
+
+	</security:http>
+	
+	<security:authentication-manager>
+		<!-- <security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"/>
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+		</security:authentication-provider> -->
+	
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+		</security:authentication-provider> 
+	</security:authentication-manager>
+</beans>
