@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nagagu.mapper.ReplyMapper">
+<insert id="insert">
+	insert into tbl_reply(rno, bno, reply, replyer,replyerNick, grade)
+	values (seq_cmReply.nextval, #{bno}, #{reply}, #{replyer},#{replyerNick},#{grade})
+</insert>
+
+<insert id="insertSelectKey"> 
+	<selectKey keyProperty="rno" order="BEFORE" resultType="long">
+		select seq_cmReply.nextval from dual
+	</selectKey>
+	insert into tbl_reply(rno, bno, reply, replyer,replyerNick,grade)
+	values (#{rno},#{bno}, #{reply}, #{replyer},#{replyerNick},#{grade})
+</insert>
+
+<select id="read" resultType="org.nagagu.domain.ReplyVO">
+select * from tbl_reply where rno=#{rno}
+</select>
+
+<delete id="delete">
+	delete from tbl_reply where rno=#{rno}
+</delete>
+
+<delete id="deleteAll">
+	delete from tbl_reply where bno=#{bno}
+</delete>
+
+<update id="update">
+	update tbl_reply
+	set reply=#{reply},
+		grade=#{grade},
+		updatedate=sysdate
+	where rno=#{rno}
+</update>
+
+<select id="getListWithPaging" resultType="org.nagagu.domain.ReplyVO">
+<![CDATA[
+select 
+rno,bno,reply,replyer,replyerNick,replydate,updatedate,grade
+from
+	(select /*+index(tbl_reply idx_reply) */
+		rownum rn, rno, bno,reply,replyer,replyerNick,replydate,updatedate,grade
+		from tbl_reply
+		where bno=#{bno}
+		and rno>0
+		and rownum <= #{cri.pageNum}*#{cri.amount}
+	)
+	where rn>(#{cri.pageNum}-1) * #{cri.amount}
+]]>
+</select>
+<select id="getListByReplyer" resultType="org.nagagu.domain.ReplyVO">
+<![CDATA[
+select 
+rno,bno,reply,replyer,replyerNick,replydate,updatedate,grade
+from
+	(select /*+index(tbl_reply idx_reply) */
+		rownum rn, rno, bno,reply,replyer,replyerNick,replydate,updatedate,grade
+		from tbl_reply
+	)
+	where replyer=#{replyer}
+]]>
+</select>
+
+<select id="getCountByBno" resultType="int">
+<![CDATA[
+select count(rno) from tbl_reply where bno = #{bno}
+]]>
+</select>
+
+</mapper>

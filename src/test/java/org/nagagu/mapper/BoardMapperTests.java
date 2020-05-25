@@ -32,6 +32,11 @@ public class BoardMapperTests {
 	public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
+	@Test
+	public void testGetListWithPaging() {
+		Criteria cri = new Criteria(1,9,0,"all","likeCnt");
+		mapper.getListWithPaging(cri).forEach(board -> log.info(board));
+	}
 	
 	@Test
 	public void testInsert() {
@@ -85,10 +90,11 @@ public class BoardMapperTests {
 	@Test
 	public void testSearch() {
 		Criteria cri=new Criteria();
-		cri.setKeyword("tt");
-		cri.setType("T");
-		cri.setIsReview(0);
+//		cri.setKeyword("tt");
+//		cri.setType("T");
+//		cri.setIsReview(0);
 		cri.setCategory("all");
+		cri.setSort("likeCnt");
 		//cri.setSort("likeCnt");
 		List<BoardVO> list= mapper.getListWithPaging(cri);
 		log.info(cri);

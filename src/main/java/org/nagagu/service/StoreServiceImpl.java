@@ -24,6 +24,8 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public List<ProductVO> getList(StoreCriteria cri) {
 		log.info("getProductList with criteria....");
+		log.info(mapper.getListWithPaging(cri));
+		log.info("cri..."+cri);
 		return mapper.getListWithPaging(cri);
 	}
 	@Override

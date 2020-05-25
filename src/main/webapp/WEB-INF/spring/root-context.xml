@@ -12,8 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" /> 
 		<property name="username" value="scott" />
@@ -21,7 +20,6 @@
 	</bean> -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
-		<!-- <property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
 		<property name="url" value="jdbc:oracle:thin:@nagagu-db.civwtkkrqknw.ap-northeast-2.rds.amazonaws.com:1521:nagagu" /> 
 		<property name="username" value="scott" />
 		<property name="password" value="scott1234" />
@@ -49,7 +47,7 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	   <property name="host" value="smtp.gmail.com" />
 	   <property name="port" value="587" />
-	   <property name="username" value="jieunkim.itit@gmail.com" />
+	   <property name="username" value="nagagu@gmail.com" />
 	   <property name="password" value="mnoenyejxizftizs" />
 	   <property name="javaMailProperties">
 	      <props>

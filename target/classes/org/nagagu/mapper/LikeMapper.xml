@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nagagu.mapper.LikeMapper">
+	<resultMap type="java.util.HashMap" id="hashmapVO">
+	</resultMap>
+	
+	<select id="cntLike" resultType="int">
+		select count(*) from tbl_like where like_member=#{like_member} and like_bno=#{like_bno}
+	</select>	
+	
+	<insert id="insertLike">
+		insert into tbl_like(like_num, like_member, like_bno)
+		values(seq_like.nextval, #{like_member}, #{like_bno})
+	</insert>	
+	
+	<delete id="deleteLike">
+		delete from tbl_like
+		where like_member = #{like_member} and like_bno=#{like_bno} 
+	</delete>	
+	
+	<select id="cntBnoLike" resultType="int">
+	select likeCnt from tbl_cmBoard where bno=#{like_bno}
+	</select>
+	<!-- 좋아요 수 업데이트 -->
+	<update id="updateBnoLike">	
+		update tbl_cmBoard set	
+			likeCnt = likeCnt + #{amount}
+		where bno=#{bno}
+	</update>
+	<!-- 좋아요 한 사진 리스트(좋아요사진=사진넘버 중에서 파라미터 멤버가 좋아한 사진들) -->
+    <select id="getLikeList" resultMap="hashmapVO">	
+ 		select *
+        from tbl_cmBoard, tbl_like
+        where 
+           	bno=like_bno and
+        	like_member=#{like_member}
+	</select>
+	<!-- 팔로우 리스트 -->
+    <select id="getFollowList" resultMap="hashmapVO">	
+ 		select *
+        from tbl_nagagu_member, tbl_follow
+        where 
+           	member_id=follow_to and
+        	follow_from=#{follow_from}
+	</select>
+	<!-- 팔로우 리스트 -->
+    <select id="getFollowedList" resultMap="hashmapVO">	
+ 		select *
+        from tbl_nagagu_member, tbl_follow
+        where 
+           	member_id=follow_from and
+        	follow_to=#{follow_to}
+	</select>
+	
+	
+	 <insert id="insertFollow">
+		insert into tbl_follow(follow_num, follow_from, follow_to)
+		values (seq_follow.nextval,#{follow_from},#{follow_to})
+	</insert>
+	<select id="cntFollow" resultType="int">
+		select count(*) from tbl_follow where follow_from=#{follow_from} and follow_to=#{follow_to}
+	</select>
+	<delete id="deleteFollow">
+		delete from tbl_follow	where follow_from = #{follow_from} and follow_to=#{follow_to} 
+	</delete>
+	<!--
+	로그인 멤버가 팔로우 한 리스트
+	<select id="getFollowMembers" parameterType="java.util.HashMap" resultMap="memberResultMap">
+		SELECT * FROM NAGAGU_MEMBER WHERE MEMBER_NUM IN (SELECT FOLLOW_TO FROM FOLLOW WHERE FOLLOW_FROM=#{fromNum})
+	</select>
+	로그인 멤버가 팔로우 당한 리스트
+	<select id="getFollowedMembers" parameterType="java.util.HashMap" resultMap="memberResultMap">
+	SELECT * FROM NAGAGU_MEMBER WHERE MEMBER_NUM IN (SELECT FOLLOW_FROM FROM FOLLOW WHERE FOLLOW_TO=#{toNum})
+	</select> -->
+</mapper>

@@ -26,10 +26,8 @@
                        		<form class='d-flex' id="sortForm" action="/store/list" method="get">
 	                       		<select name="sort" class="form-control mr-2">									
 									<option value="regDate" id="new" ${pageMaker.store_cri.sort=='regDate'? 'selected':''}>최신순</option>
-									<option value="readCnt" id="sales" ${pageMaker.store_cri.sort=='readCnt'? 'selected':''}>판매량순</option>
-									<option value="readCnt" id="read" ${pageMaker.store_cri.sort=='likeCnt'? 'selected':''}>조회순</option> 
-									<option value="likeCnt" id="like" ${pageMaker.store_cri.sort=='likeCnt'? 'selected':''}>좋아요순</option> 
-									<option value="price" id="price" ${pageMaker.store_cri.sort=='likeCnt'? 'selected':''}>가격순</option> 
+									<option value="readCnt" id="read" ${pageMaker.store_cri.sort=='readCnt'? 'selected':''}>조회순</option> 
+									<option value="price" id="price" ${pageMaker.store_cri.sort=='price'? 'selected':''}>가격순</option> 
 								</select>
 								<input type='hidden' name='category' value='${pageMaker.store_cri.category}'>
 							</form>
@@ -39,8 +37,6 @@
                        			<select name='type' class="form-control mr-2">
                        				<option value=""
                        					<c:out value="${pageMaker.store_cri.type==null? 'selected':''}"/>>--</option>
-                       				<option value="G" 
-                       					<c:out value="${pageMaker.store_cri.type=='G'? 'selected':''}"/>>태그</option>
                        				<option value="T"
                        					<c:out value="${pageMaker.store_cri.type=='T'? 'selected':''}"/>>제목</option>
                        				<option value="C"
@@ -76,10 +72,8 @@
 					<div class="profile">
 						<div class="profile_children">
 							<div> 
-								<a href="memberLikePics.cm?MEMBER_NUM='${board.writer}'" class="move"> 
 									<img src="${board.writer_picture}"	style="width:50px; height:50px;"><br/> 
 									<b><c:out value="${board.workshopName}"/></b>  
-								</a> 
 							</div >   
 						</div> 
 						<div class="follow_readcount">
@@ -219,28 +213,6 @@ $(document).ready(function() {
 	        }    
 	    })
     );
-	//검색어 색깔 표시기능
-	var target_word = '${pageMaker.store_cri.keyword}';
-    if(target_word!=''){
-        $('b:contains('+target_word+')').each(function() {
-            var text = $(this).text();
-            var b = text.replace(''+target_word+'','<span style="color:red;">'+target_word+'</span>');
-            console.log('b'+b)
-            $('b:contains('+target_word+')').html(b);    
-        })
-        $('span:contains('+target_word+')').each(function() {
-            var text = $(this).text();
-            var b = text.replace(''+target_word+'','<span style="color:red;">'+target_word+'</span>');
-            console.log('b'+b)
-            $('span:contains('+target_word+')').html(b);    
-        })
-        $('p:contains('+target_word+')').each(function() {
-            var text = $(this).text();
-            var b = text.replace(''+target_word+'','<span style="color:red;">'+target_word+'</span>');
-            console.log('b'+b)
-            $('p:contains('+target_word+')').html(b);    
-        })
-    }
 	//정렬
 	var sortForm=$('#sortForm');
 	$('#sortForm').on('change',function(e){
@@ -254,11 +226,6 @@ $(document).ready(function() {
 		sortForm.find('input[name="category"]').val($(this).attr("id"));
 		sortForm.submit();
 	})
-	
-	//카테고리 css활성화
-	var category = '${pageMaker.store_cri.category}';
-	$('.category_caption').find('a').removeClass('active');
-	$('#'+category).addClass('active');
 	
 });
 </script>
