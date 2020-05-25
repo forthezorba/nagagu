@@ -32,12 +32,7 @@ public class BoardMapperTests {
 	public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
-	@Test
-	public void testGetListWithPaging() {
-		Criteria cri = new Criteria(1,9,0,"all","likeCnt");
-		mapper.getListWithPaging(cri).forEach(board -> log.info(board));
-	}
-	
+
 	@Test
 	public void testInsert() {
 		BoardVO board= new BoardVO();
