@@ -8,6 +8,16 @@
 '나만의 가구'란 뜻으로, 소비자와 공방을 연결하는 가구 관련 커뮤니티/스토어 플랫폼 입니다. '나가구'프로젝트는 회원가입/로그인/CRUD/좋아요 등 필수 기능들이 들어간 게시판 기반 웹앱입니다. 학원에서 5명이서 함께 만들었고, 수료 후 개인적으로 리팩토링을 거쳐 제가 직접 사용한 기술로 프로젝트를 새롭게 만들었습니다.
 - (www.nagagu.ga)
 
+## 이미지
+
+![구매완료](https://user-images.githubusercontent.com/59009409/82997801-d3813480-a041-11ea-8ca9-1cca521c66b0.jpg)
+…]
+![커뮤니티_디테일](https://user-images.githubusercontent.com/59009409/82997790-d0864400-a041-11ea-9919-65b66712b2a2.jpg)
+![타인_마이페이지](https://user-images.githubusercontent.com/59009409/82997793-d1b77100-a041-11ea-8281-0164908c656a.jpg)
+![결제내역](https://user-images.githubusercontent.com/59009409/82997797-d2e89e00-a041-11ea-8f82-6a782a65f07a.jpg)
+![마이페이지_댓글](https://user-images.githubusercontent.com/59009409/82998050-2d81fa00-a042-11ea-814b-534e66431bbf.jpg)
+
+
 ## 웹사이트 구성
 - 커뮤니티 : 일반 회원들이 사진을 올리고 댓글로 의견을 교환할 수 있는 공간입니다.
 - 스토어   : 공방사장님들은 상품을 등록하고 판매, 일반 회원들은 상품을 구매할 수 있는 공간입니다.
