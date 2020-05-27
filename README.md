@@ -9,9 +9,7 @@
 - (www.nagagu.ga)
 
 ## 이미지
-
-![구매완료](https://user-images.githubusercontent.com/59009409/82997801-d3813480-a041-11ea-8ca9-1cca521c66b0.jpg)
-…]
+<img src="https://user-images.githubusercontent.com/59009409/82997801-d3813480-a041-11ea-8ca9-1cca521c66b0.jpg" width="30%">
 ![커뮤니티_디테일](https://user-images.githubusercontent.com/59009409/82997790-d0864400-a041-11ea-9919-65b66712b2a2.jpg)
 ![타인_마이페이지](https://user-images.githubusercontent.com/59009409/82997793-d1b77100-a041-11ea-8281-0164908c656a.jpg)
 ![결제내역](https://user-images.githubusercontent.com/59009409/82997797-d2e89e00-a041-11ea-8f82-6a782a65f07a.jpg)
