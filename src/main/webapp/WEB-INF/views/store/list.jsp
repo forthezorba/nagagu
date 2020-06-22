@@ -88,8 +88,6 @@
 					</div>
 					<div class="item-content text-center"> 
 						<div class="item-title"><h3>${board.title}</h3></div>
-						<div class="item-brand"><h5>${board.workshopName}</h5></div>
-						
 						<fmt:formatNumber var='price' value="${board.price}" pattern="#,###" />
 						<div class="item-price"><h5>${price}<span>원</span></h5></div>
 					</div> 

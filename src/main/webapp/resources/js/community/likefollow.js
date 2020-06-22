@@ -23,7 +23,8 @@ $(document).ready(function(){
 	};
 	checkLike();
 	//좋아요 insert
-	$(document).delegate(".likeBtn","click",function(){
+	$(document).delegate(".likeBtn","click",function(e){
+		e.preventDefault();
 		if(member_id==null){
 			alertify.alert('로그인 해주세요');
 			return;
@@ -49,7 +50,8 @@ $(document).ready(function(){
 	});
 	
 	//팔로우 버튼 누르기
-	$(document).on("click",".follow_btn",function (){
+	$(document).on("click",".follow_btn",function (e){
+		e.preventDefault();
 		if(member_id==null){
 			alertify.alert('로그인 해주세요');
 			return;

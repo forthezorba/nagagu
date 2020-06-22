@@ -268,7 +268,7 @@ body {
 			            <div class="item__title">CUSTOM</div> 
 			        </a>
 			        <div class="name_container">
-			        	<a href="community.cm"><p class="pn">MORE</p></a>
+			        	<a href="/community/list"><p class="pn">MORE</p></a>
 			        </div>
 			    </div>
 			</div>
@@ -337,19 +337,15 @@ body {
 		//NAGAGU LOGO실행
 		$(document).on('click','#cm_slider',function(){
 			$('.scene.two header').html('<h1>COMMUNITY</h1>구경하고 뽐내고 싶은 사진이 있다면<br/>"커뮤니티" 메뉴에 사진을 올려보세요.<br/>좋아요 팔로우 등 다양한 사람들과 소통할 수 있습니다.</br>');
-			$('.name_container').html('<a href="community.cm"><p class="pn">MORE</p></a>')
+			$('.name_container').html('<a href="/community/list"><p class="pn">MORE</p></a>')
 		})
 		$(document).on('click','#store_slider',function(){
 			$('.scene.two header').html('<h1>STORE</h1>완성도와 퀄리티가 높은 수제가구를 사고싶다면 <br/>"STORE" 메뉴를 눌러보세요.<br/>공방을 운영하는 전문가들이 직접 만든 가구를 판매합니다.</br>');
-			$('.name_container').html('<a href="productcategory.pro"><p class="pn">MORE</p></a>')
-		})
-		$(document).on('click','#academy_slider',function(){
-			$('.scene.two header').html('<h1>ACADEMY</h1>직접 만들어 보고싶다! <br/>라는 생각이 든다면 "ACADEMY" 메뉴를 눌러보세요.<br/>공방을 운영하는 전문가들이 직접 수업을 진행합니다.</br>');
-			$('.name_container').html('<a href="classlist.ac"><p class="pn">MORE</p></a>')
+			$('.name_container').html('<a href="/store/list"><p class="pn">MORE</p></a>')
 		})
 		$(document).on('click','#custom_slider',function(){
 			$('.scene.two header').html('<h1>CUSTOM</h1>나의 상황에 꼭 맞는 가구를 "견적내보기" 메뉴에 올려보세요.<br/>최고의 전문가들이 모여 상담해주고 견적을 내줍니다.</br>');
-			$('.name_container').html('<a href="estimate.es"><p class="pn">MORE</p></a>')
+			$('.name_container').html('<a href="/store/list"><p class="pn">MORE</p></a>')
 		})
 
 	})

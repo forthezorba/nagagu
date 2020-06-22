@@ -94,9 +94,9 @@ var csrfTokenValue = "${_csrf.token}";
 			    						output += '<div class="col-2">배송</div>'
 				    					output += '<div class="col-2">사이즈</div>'
 			    						output += '<div class="col-2">컬러</div>' 
-		    							output += '<div class="col-1">수량</div>'   
-	                                    output += '<div class="col-3 btn_wrap">'
-		    							output += '<button class="btn btn-outline-light delete_btn" basket_num='+retVal.getbasketList[j].BASKET_NUM+'>삭제</button></div></div>'   
+		    							output += '<div class="col-2">수량</div>'   
+	                                    output += '<div class="col-2 btn_wrap">'
+		    							output += '<button class="btn btn-outline-dark delete_btn" basket_num='+retVal.getbasketList[j].BASKET_NUM+'>삭제</button></div></div>'   
 					    				
 					    				output += '<div class="row values">' 
 				    					output += '<a href="'+url+retVal.getbasketList[j].BNO+'">'
@@ -104,7 +104,7 @@ var csrfTokenValue = "${_csrf.token}";
 					    				output += '<div class="col-2">'+retVal.getbasketList[j].SHIPCOMPANY+'</div>'
 					    				output += '<div class="col-2" style="word-break:break-all">'+retVal.getbasketList[j].BASKET_SIZE+'</div>'
 					    				output += '<div class="col-2">'+retVal.getbasketList[j].BASKET_COLOR+'</div>'
-					    				output += '<div class="price col-1" value="수량">'
+					    				output += '<div class="price col-2" value="수량">'
 						    				output += '<select class="amount forTotal" name="basket_amount" size="1" basket_num='+retVal.getbasketList[j].BASKET_NUM+'>';
 											output += '<c:forEach var="i" begin="1" end="10">';
 											if(amount==${i}){
@@ -113,7 +113,7 @@ var csrfTokenValue = "${_csrf.token}";
 												output += '<option value="${i}">${i}</option>';
 											} 
 											output += '</c:forEach></select></div>';
-					    				output += '<div class="price_wrap text-right col-3">'
+					    				output += '<div class="price_wrap text-right col-2">'
 							    			output += '<div class="basic_price text-right" value='+retVal.getbasketList[j].PRICE+'>가격</div><span>'+retVal.getbasketList[j].PRICE+'</span>'
 							    			output += '<div class="shipPrice text-right" value='+retVal.getbasketList[j].SHIPPRICE+'>+배송비</div><span>'+retVal.getbasketList[j].SHIPPRICE+'</span>'
 						    				output += '<div class="chongprice text-right">총가격</div><span></span></b>'  

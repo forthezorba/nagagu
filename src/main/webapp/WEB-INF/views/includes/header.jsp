@@ -49,10 +49,7 @@
 							<a class="nav-link header_nav" id="header_cm" href="/community/list">COMMUNITY</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link header_nav" id="header_st" href="/store/entry">STORE</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link header_nav" id="header_cs" href="/custom/list">CUSTOM</a>
+							<a class="nav-link header_nav" id="header_st" href="/store/list">STORE</a>
 						</li>
 					</ul>
 				</div>

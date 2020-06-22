@@ -180,7 +180,7 @@
                         		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         		
                         		<button type="submit" data-oper='register' class="btn btn-outline-dark">등록</button>
-                        		<button type="reset" class="btn btn-outline-dark">취소</button> 
+                        		<button type="reset" class="btn btn-outline-dark back">취소</button> 
                         	</form>
                         
                         </div>
@@ -197,6 +197,9 @@ var csrfTokenValue = "${_csrf.token}";
 $(document).ajaxSend(function(e,xhr,options){
 	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 });
+$('button[type="reset"]').on('click',function(e){
+	history.back();  
+});
 /*size, color, option 추가*/
 function addSize() {
 	var txt = '<input class="form-control" name="allsize" placeholder="예시) 1000*50*70">'
@@ -212,6 +215,7 @@ function addColor() {
 function deleteColor() {
 	$('.color input:last').remove();
 }
+
 </script>
 <script type="text/javascript" src="/resources/js/store/file.js"></script>
 <!-- include summernote css/js -->

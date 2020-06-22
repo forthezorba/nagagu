@@ -116,7 +116,7 @@ width:600px;}
 	         	<div class="sidebar col-lg-4">
 					<div class=" d-flex justify-content-between pb-2">
 						<div class="profile-img">
-							<a href="/mypage?member_id=${board.writer}">
+							<a href="/mypage/other?writer=${board.writer}">
 							<img src="${board.writer_picture}" style="width: 50px; height: 50px;" class="src"/>
 							<b>${board.nick}</b> 
 							</a>

@@ -47,8 +47,10 @@ select * from tbl_cmBoard where writer=#{writer}
 			</trim>
 		</foreach>
 	</trim>
-	<if test="isReview != 0">  isReview=#{isReview} AND</if>
-	<if test="category != 'all'">  category=#{category} AND</if>
+	<trim suffix="AND" prefixOverrides="AND">
+		<if test="isReview != 0">AND isReview=#{isReview}</if>
+		<if test="category != 'all'">AND  category=#{category}</if>
+	</trim>
 </sql> 
 <select id="getListWithPaging" resultMap="memberMap">
 	<![CDATA[
@@ -60,7 +62,7 @@ select * from tbl_cmBoard where writer=#{writer}
 		rownum rn, bno,title,content,writer,writer_picture,nick,tags,category,regdate,updatedate,replyCnt,likeCnt,readCnt,isreview,mainimage,productno
 		from (select * from tbl_cmBoard 
 	]]>
-		<if test="sort != null"> ORDER BY ${sort} DESC </if>
+		<if test="sort != ''"> ORDER BY ${sort} DESC </if>
 		)
 		where 
 		<include refid="criteria"></include>

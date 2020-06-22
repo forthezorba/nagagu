@@ -21,13 +21,14 @@ public class Criteria {
 	private String sort;
 	
 	public Criteria() {
-		this(1,9,0,"all");
+		this(1,9,0,"all","regDate");
 	}
-	public Criteria(int pageNum, int amount, int review, String category) {
+	public Criteria(int pageNum, int amount, int review, String category, String sort) {
 		this.pageNum=pageNum;
 		this.amount=amount;
 		this.isReview=review;
 		this.category = category;
+		this.sort = sort;
 	}
 	//for reply
 	public Criteria(int pageNum, int amount) {
